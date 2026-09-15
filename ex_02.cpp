@@ -2,35 +2,58 @@
 #include <initializer_list>
 #include <string>
 #include <array>
+#include <vector>
 #include <algorithm>
+
 using namespace std;
 
-void ex_12()
+namespace A
 {
+    int value = 10;
+}
+namespace B
+{
+    int value = 20;
+}
 
-    enum class Join{Rack = 1, Paper, Scissors};
+void ex_02_47(){
+
+    cout << "A : " << A::value << endl;
+    cout << "B : " << B::value << endl;
+
+}
+
+void ex_02_49(){
+    
+    enum class Menu{
+        Insert = 1,
+        Dlete,
+        Update
+    };
 
     int num;
 
     while(1){
 
-        cout << "정수 입력(1, 2, 3이 이닌 수는 프로그램 종료) : ";
+        cout << "정수 입력 : ";
 
-        cin >> num;
+        cin >> num ;
 
-        Join Jo = static_cast<Join>(num);
+        Menu Me = static_cast<Menu>(num);
 
-        if(Jo == Join::Rack){
+        if(Me == Menu::Insert){
 
-            cout << "       Rack" << endl;
+            cout << "       Insert" << endl;
 
-        } else if(Jo == Join::Scissors){
+        } else if(Me == Menu::Dlete){
 
-            cout << "       Scissors" << endl;
+            cout << "       Dlete" << endl;
 
-        } else if(Jo == Join::Paper){
+        } else
 
-            cout << "       Paper" << endl;
+        if(Me == Menu::Update){
+
+            cout << "       Update" << endl;
 
         } else{
 
@@ -38,104 +61,121 @@ void ex_12()
 
         }
 
-
     }
 
-}
-
-void ex_13(){
-
-    double num;
-
-    cout << "실수를 입력하세요 : ";
-    cin >> num;
-
-    cout << endl;
-    
-    int intPart = static_cast<int>(num); //double형을 int형으로 변환하는 방식이다
-    double decPart = num - intPart; //int형으로 바꾼 값을 기존에 입력한 값에 빼는 방식으로 소수를 남겼다
-
-    cout << "정수 part : " << intPart << endl;
-    cout << "소수 part : " << decPart << endl;
-
 
 }
 
-auto list_exam(initializer_list<string> value, string S){
+void ex_02_50(){
 
-    string save = "a";
-    int Min = 9999;
+    double price{3500.75};
+    auto count{3.5};
+    auto total{price * count};
 
-    for(auto data : value){
+    count = static_cast<int>(count);
+    total = static_cast<int>(total);
 
-        int diff = S[0] - data[0];
-        int dig = (diff < 0) ? -diff : diff;
+    std::cout << "count = " << count << '\n';
+    std::cout << "total = " << total << '\n';
 
-        if(dig < Min){
-
-            Min = dig;
-            save = data;
-
-        }
-
-    }
-
-    return save;
 
 }
 
-void ex_14(){
-
-    cout << "{ 'd', 'p', 'r', 'w', 'g', 'f' }문자 중 h와 가까운 문자는 : " ;
-    cout << list_exam({ "d", "p", "r", "w", "g", "f" }, "h") << endl;
-
-    cout << "{ 'k', 'q', 'b', 'r', 'a', 'e', 'v', 'z'}문자 중 w와 가까운 문자는 : ";
-    cout << list_exam({ "k", "q", "b", "r", "a", "e", "v", "z"}, "w") << endl;
-
-}
-
-void ex_15(){
-
-    cout << "정수 입력 : ";
+void ex_02_51(){
 
     array<int, 5> arr;
 
     for(int i = 0; i < 5; i++){
 
-        cin >> arr[i]; 
+        cin >> arr[i];
 
     }
 
-    cout << "배열에 저장된 내용 : ";
+    int sum = 0;
+
+    sort(arr.begin(), arr.end());
+
+    int max = arr[4];
+
+    for (int data : arr){
+
+        sum += data;
+
+    }
+
+    cout << "sum = " << sum << endl;
+    cout << "max = " << max << endl;
+
+}
+
+void ex_02_52(){
+
+    vector<int> arr(5);
+    int count = 0;
+
+    cout << "정수 5개 입력 > ";
 
     for(int i = 0; i < 5; i++){
 
-        cout << arr[i] << " ";
-    
+        cin >> arr[i];
+
+    }   
+
+    for(int data : arr){
+
+        if(data % 2 == 0){
+
+            cout << data << " ";
+            count++;
+
+        }
+
     }
 
     cout << endl;
 
-    sort(arr.begin(), arr.end());
+    cout << "count = " << count << endl;
 
-    cout << "배열 오름차순 정렬 : ";
+}
 
-    for(int i = 0; i < 5; i++){
+void printResult(initializer_list<int> values) {
+    
+    int sum = 0, count = 0;
 
-        cout << arr[i] << " ";
+    for(int data : values){
+
+        if(data >= 5 ){
+
+            count++;
+            sum += data;
+
+        }
 
     }
 
+    cout << "count = " << count << endl;
+    cout << "sum = " << sum << endl;
 
 }
+
+void ex_02_53(){
+
+    printResult({3, 8, 2, 10, 5});
+ 
+}
+
+
 
 int main()
 {
 
-    // ex_12();
-    // ex_13();
-    // ex_14();
-    ex_15();
+    // ex_02_47();
+    // ex_02_49();
+    // ex_02_50();
+    // ex_02_51();
+    // ex_02_52();
+    ex_02_53();
+
 
     return 0;
 }
