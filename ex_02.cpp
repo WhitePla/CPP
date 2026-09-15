@@ -1,46 +1,46 @@
 #include <iostream>
 #include <initializer_list>
 #include <string>
+#include <array>
+#include <algorithm>
 using namespace std;
 
 void ex_12()
 {
 
-    enum class Join
-    {
-        Rack = 1,
-        Paper,
-        Scissors
-    };
+    enum class Join{Rack = 1, Paper, Scissors};
 
     int num;
 
-    while (1)
-    {
-        // static_cast나 const_cast의 <>과()의 순서 ()를 <>의 데이터형 값으로 변환시키겠다
-        // ex) static_cast<int>(double) == 식별자double을 int형으로 변환하겠다
-        cout << "정수 입력 (1, 2, 3이 아닌 수는 프로그램 종료) : ";
+    while(1){
+
+        cout << "정수 입력(1, 2, 3이 이닌 수는 프로그램 종료) : ";
+
         cin >> num;
 
-        Join jo = static_cast<Join>(num);
+        Join Jo = static_cast<Join>(num);
 
-        if (jo == Join::Rack) {
+        if(Jo == Join::Rack){
 
             cout << "       Rack" << endl;
 
-        } else if (jo == Join::Paper) {
-
-            cout << "       Paper" << endl;
-
-        } else if (jo == Join::Scissors) {
+        } else if(Jo == Join::Scissors){
 
             cout << "       Scissors" << endl;
 
-        } else {
+        } else if(Jo == Join::Paper){
+
+            cout << "       Paper" << endl;
+
+        } else{
 
             break;
+
         }
+
+
     }
+
 }
 
 void ex_13(){
@@ -68,7 +68,8 @@ auto list_exam(initializer_list<string> value, string S){
 
     for(auto data : value){
 
-        int dig = abs(S[0] - data[0]);
+        int diff = S[0] - data[0];
+        int dig = (diff < 0) ? -diff : diff;
 
         if(dig < Min){
 
@@ -93,13 +94,48 @@ void ex_14(){
 
 }
 
+void ex_15(){
+
+    cout << "정수 입력 : ";
+
+    array<int, 5> arr;
+
+    for(int i = 0; i < 5; i++){
+
+        cin >> arr[i]; 
+
+    }
+
+    cout << "배열에 저장된 내용 : ";
+
+    for(int i = 0; i < 5; i++){
+
+        cout << arr[i] << " ";
+    
+    }
+
+    cout << endl;
+
+    sort(arr.begin(), arr.end());
+
+    cout << "배열 오름차순 정렬 : ";
+
+    for(int i = 0; i < 5; i++){
+
+        cout << arr[i] << " ";
+
+    }
+
+
+}
+
 int main()
 {
 
     // ex_12();
     // ex_13();
-    ex_14();
-    // ex_15();
+    // ex_14();
+    ex_15();
 
     return 0;
 }
